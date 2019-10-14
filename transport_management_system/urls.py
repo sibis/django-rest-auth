@@ -16,10 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from authentication.views import signup, login, test, logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api-auth/', include('rest_framework.urls')),
-    url(r'^auth/', include('authentication.urls'))
+    url(r'^api-auth/', include('authentication.urls')),
 ]
+

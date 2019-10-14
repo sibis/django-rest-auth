@@ -32,6 +32,7 @@ AUTH_USER_MODEL = 'authentication.User'
 
 AUTHENTICATION_BACKENDS = ['authentication.backends.EmailAuthBackend', ]
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,12 +46,18 @@ INSTALLED_APPS = [
     # Apps from django rest framework
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     
     # My apps
     'authentication',
+    
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
