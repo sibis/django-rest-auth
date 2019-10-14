@@ -12,10 +12,10 @@ class UserManager(BaseUserManager):
     to create `User` objects.
     """
 
-    def create_user(self, username, email, password=None):
+    def create_user(self, email, username=None, password=None):
         """Create and return a `User` with an email, username and password."""
-        if username is None:
-            raise TypeError('Users must have a username.')
+        # if username is None:
+        #     raise TypeError('Users must have a username.')
 
         if email is None:
             raise TypeError('Users must have an email address.')
@@ -42,12 +42,15 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('Email Address', db_index=True, unique=True)
-    name = models.CharField(max_length = 80)
-    phone = models.CharField(max_length = 30)
+    username = models.CharField(max_length = 80, null=True)
+    name = models.CharField(max_length = 80, null=True)
+    phone = models.CharField(max_length = 30, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now = True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    
 
     objects = UserManager()
 
