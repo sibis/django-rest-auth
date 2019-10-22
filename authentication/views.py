@@ -35,26 +35,6 @@ def signup(request):
         return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
-@permission_classes((permissions.AllowAny,))
-def login_test(request):
-    serialized = LoginSerializer(data=request.data)
-    print('before')
-    if serialized.is_valid():
-        print('valid')
-        print(serialized.data['email'])
-        print(serialized.data['password'])
-        user = EmailAuthBackend.authenticate(username=serialized.data['email'], password=serialized.data['password'])
-        print(user)
-        if user is not None :
-            print('not none')
-            auth.login(request, user)
-            return Response(request.user, status=status.HTTP_200_OK)
-        else:
-            print("noneee--")
-            return Response(serialized._errors, status=status.HTTP_404_NOT_FOUND)
-
-
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
